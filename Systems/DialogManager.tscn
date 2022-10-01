@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Dialog.gd" type="Script" id=1]
+[ext_resource path="res://Gui/DialogDisplay.tscn" type="PackedScene" id=2]
+
+[node name="DialogManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PromptDisplay" parent="." instance=ExtResource( 2 )]
+margin_left = 75.0
+margin_top = 70.0
+margin_right = 450.0
+margin_bottom = 100.0
