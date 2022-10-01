@@ -17,7 +17,7 @@ class DialogChoice:
 
 enum moods{
 	AFFECTION
-	MORALE
+	FEAR
 	RAGE
 }
 
@@ -33,7 +33,10 @@ var chosen_choice := 4
 
 func testChoice():
 	setupChoice("It doesn't have to go like this",
-	[DialogChoice.new("Like hell it doesn't, I've got you dead to rights!", Vector3.ZERO, 0),DialogChoice.new("How dare you say that. After what you did!", Vector3.ZERO, 0),DialogChoice.new("I wish that were true...", Vector3.ZERO, 0),DialogChoice.new("Maybe...", Vector3.ZERO, 0) ])
+	[DialogChoice.new("Like hell it doesn't, I've got you dead to rights!", Vector3(0,10,00), 0),
+	DialogChoice.new("How dare you say that. After what you did!", Vector3(0,0,10), 0),
+	DialogChoice.new("I wish that were true...", Vector3(10,-10,0), 0),
+	DialogChoice.new("Maybe...", Vector3(20,0,0), 0) ])
 	
 func update_dialog_gui_choice(choice:DialogChoice, gui:DialogDisplay, choice_num:int):
 	gui.text = choice.text
@@ -47,7 +50,7 @@ func update_dialog_gui_prompt(text:String, gui:DialogDisplay):
 	gui.locked = true
 
 func setupChoice(new_prompt:String, new_choices:Array):
-	chosen_choice = 4
+	chosen_choice = 3
 	prompt = new_prompt
 	choices = new_choices
 	update_dialog_gui_prompt(prompt, _promptDisplay)
@@ -67,5 +70,5 @@ func _on_choiceDialog_choice_selected(choice_number):
 		if(i != chosen_choice):_choiceDisplay[i].vanish()
 		
 
-
+	
 

@@ -30,8 +30,13 @@ __meta__ = {
 
 [node name="EveryTenSeconds" type="Timer" parent="."]
 wait_time = 10.0
+one_shot = true
 
 [node name="SwordManager" parent="." instance=ExtResource( 6 )]
+
+[node name="NotTenSeconds" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="timeout" from="EveryTenSeconds" to="." method="_on_EveryTenSeconds_timeout"]
 [connection signal="fightWon" from="SwordManager" to="." method="_on_SwordManager_fightWon"]
