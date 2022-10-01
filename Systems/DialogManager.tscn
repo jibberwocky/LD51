@@ -12,7 +12,36 @@ __meta__ = {
 }
 
 [node name="PromptDisplay" parent="." instance=ExtResource( 2 )]
-margin_left = 75.0
-margin_top = 70.0
-margin_right = 450.0
-margin_bottom = 100.0
+margin_left = 50.0
+margin_top = 45.0
+margin_right = 462.0
+margin_bottom = 75.0
+base_frame = 0
+locked = true
+
+[node name="choiceDialog1" parent="." instance=ExtResource( 2 )]
+margin_left = 100.0
+margin_top = 85.0
+margin_right = 412.0
+margin_bottom = 115.0
+
+[node name="choiceDialog2" parent="." instance=ExtResource( 2 )]
+margin_left = 100.0
+margin_top = 120.0
+margin_right = 412.0
+margin_bottom = 150.0
+
+[node name="choiceDialog3" parent="." instance=ExtResource( 2 )]
+margin_left = 100.0
+margin_top = 154.0
+margin_right = 412.0
+margin_bottom = 184.0
+
+[node name="choicesDelay" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="choice_selected" from="choiceDialog1" to="." method="_on_choiceDialog_choice_selected"]
+[connection signal="choice_selected" from="choiceDialog2" to="." method="_on_choiceDialog_choice_selected"]
+[connection signal="choice_selected" from="choiceDialog3" to="." method="_on_choiceDialog_choice_selected"]
+[connection signal="timeout" from="choicesDelay" to="." method="_on_choicesDelay_timeout"]

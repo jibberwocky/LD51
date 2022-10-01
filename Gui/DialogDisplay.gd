@@ -1,10 +1,12 @@
 extends NinePatchRect
+class_name DialogDisplay
 
+signal choice_selected(choice_number)
 
-var text := "text" setget set_text
+export var text := "text" setget set_text
 
 func set_text(txt:String):
-	_label.text = txt
+	if(_label):_label.text = txt
 	text = txt
 
 const MOVE_HEIGHT = 3
@@ -12,12 +14,13 @@ const MOVE_SPEED = 0.2
 const ANIMATE_SPEED = 0.05
 
 export var base_frame := 2 setget set_base_frame
+var choice_number = 0
 var base_pos : float
 var target_pos : float
 var base_height : float
 var base_visiblity : float
-var target_visibility : float = 1
-var locked setget lock
+var target_visibility : float = 0
+export var locked : bool setget lock
 
 onready var _button := $Button
 onready var _label := $Label
@@ -32,7 +35,6 @@ func _ready():
 #	_label.margin_top = self.margin_top +6
 #	_label.margin_left = self.margin_left +6
 #	_label.margin_right = self.margin_right -6
-	self.locked = false
 	base_pos = self.margin_top
 	target_pos = base_pos
 	base_height = self.margin_bottom - self.margin_top
@@ -80,13 +82,21 @@ func lock(locking: bool):
 	if(locking):
 		print("locking button")
 	locked = locking
-	_button.disabled = locking
+#	_button.disabled = locking
 	
 func vanish():
+	self.locked = true
 	target_pos = base_pos+MOVE_HEIGHT*5
 	target_visibility = 0
 
+func activate():
+	change_color(base_frame)
+	target_pos = base_pos
+	target_visibility = 1
+
 
 func _on_Button_pressed():
+	if(locked): return
+	emit_signal("choice_selected", choice_number)
 	self.locked = true
-	vanish()
+	

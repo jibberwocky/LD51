@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Art/Gui/healthBarover.png" type="Texture" id=1]
+[ext_resource path="res://Art/Gui/healthBarBar.png" type="Texture" id=2]
+[ext_resource path="res://Art/Gui/healthBarunder.png" type="Texture" id=3]
+[ext_resource path="res://Gui/healthbar1.gd" type="Script" id=4]
+
+[node name="healthbar1" type="TextureProgress"]
+margin_left = -34.0
+margin_top = -3.0
+margin_right = 34.0
+margin_bottom = 3.0
+rect_pivot_offset = Vector2( 53, 6 )
+step = 0.0
+value = 100.0
+texture_under = ExtResource( 3 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

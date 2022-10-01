@@ -1,0 +1,122 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Characters/Duelist.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Gui/DialogDisplay.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Systems/SwordManager.gd" type="Script" id=3]
+[ext_resource path="res://Gui/healthbar1.tscn" type="PackedScene" id=7]
+
+[node name="SwordManager" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Duelist1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 283, 240 )
+
+[node name="ThustButton" parent="Duelist1" instance=ExtResource( 2 )]
+anchor_left = 0.368
+anchor_top = 0.5
+anchor_right = 0.368
+anchor_bottom = 0.5
+margin_left = -186.552
+margin_top = -69.0
+margin_right = -112.552
+margin_bottom = -33.0
+rect_pivot_offset = Vector2( 60.448, 21 )
+text = "Thrust"
+base_frame = 5
+
+[node name="waitButton" parent="Duelist1" instance=ExtResource( 2 )]
+anchor_left = 0.368
+anchor_top = 0.5
+anchor_right = 0.368
+anchor_bottom = 0.5
+margin_left = -266.552
+margin_top = -53.0
+margin_right = -192.552
+margin_bottom = -17.0
+rect_pivot_offset = Vector2( 60.448, 21 )
+text = "Thrust"
+base_frame = 1
+locked = true
+
+[node name="ParryButton" parent="Duelist1" instance=ExtResource( 2 )]
+anchor_left = 0.368
+anchor_top = 0.5
+anchor_right = 0.368
+anchor_bottom = 0.5
+margin_left = -186.552
+margin_top = -27.0
+margin_right = -112.552
+margin_bottom = 9.0
+text = "Parry"
+base_frame = 5
+
+[node name="healthbar1" parent="Duelist1" instance=ExtResource( 7 )]
+anchor_left = 0.262
+anchor_top = 0.5
+anchor_right = 0.262
+anchor_bottom = 0.5
+margin_left = -168.536
+margin_top = 12.0
+margin_right = -100.536
+margin_bottom = 18.0
+
+[node name="Duelist2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 271, 240 )
+flip_h = true
+
+[node name="ThustButton" parent="Duelist2" instance=ExtResource( 2 )]
+anchor_left = 0.368
+anchor_top = 0.5
+anchor_right = 0.368
+anchor_bottom = 0.5
+margin_left = 16.448
+margin_top = -69.0
+margin_right = 90.448
+margin_bottom = -33.0
+text = "Thrust"
+base_frame = 5
+locked = true
+
+[node name="ParryButton" parent="Duelist2" instance=ExtResource( 2 )]
+anchor_left = 0.368
+anchor_top = 0.5
+anchor_right = 0.368
+anchor_bottom = 0.5
+margin_left = 16.448
+margin_top = -27.0
+margin_right = 90.448
+margin_bottom = 9.0
+text = "Parry"
+base_frame = 5
+locked = true
+
+[node name="waitButton2" parent="Duelist2" instance=ExtResource( 2 )]
+anchor_left = 0.368
+anchor_top = 0.5
+anchor_right = 0.368
+anchor_bottom = 0.5
+margin_left = 97.448
+margin_top = -53.0
+margin_right = 171.448
+margin_bottom = -17.0
+rect_pivot_offset = Vector2( 60.448, 21 )
+text = "Thrust"
+base_frame = 1
+locked = true
+
+[node name="healthbar2" parent="Duelist2" instance=ExtResource( 7 )]
+anchor_left = 0.83
+anchor_top = 0.5
+anchor_right = 0.83
+anchor_bottom = 0.5
+margin_left = -37.24
+margin_top = 12.0
+margin_right = 30.76
+margin_bottom = 18.0
+
+[connection signal="choice_selected" from="Duelist1/ThustButton" to="." method="_on_ThustButton_choice_selected"]
+[connection signal="choice_selected" from="Duelist1/waitButton" to="." method="_on_ThustButton_choice_selected"]
+[connection signal="choice_selected" from="Duelist1/ParryButton" to="." method="_on_ParryButton_choice_selected"]
+[connection signal="choice_selected" from="Duelist2/ThustButton" to="." method="_on_ThustButton_choice_selected"]
+[connection signal="choice_selected" from="Duelist2/ParryButton" to="." method="_on_ParryButton_choice_selected"]
+[connection signal="choice_selected" from="Duelist2/waitButton2" to="." method="_on_ThustButton_choice_selected"]

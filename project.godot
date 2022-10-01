@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Dialog",
 "language": "GDScript",
 "path": "res://Dialog.gd"
+}, {
+"base": "NinePatchRect",
+"class": "DialogDisplay",
+"language": "GDScript",
+"path": "res://Gui/DialogDisplay.gd"
 } ]
 _global_script_class_icons={
-"Dialog": ""
+"Dialog": "",
+"DialogDisplay": ""
 }
 
 [application]
