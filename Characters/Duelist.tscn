@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Art/Sprites/Duelist_1.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Duelist.gd" type="Script" id=2]
 [ext_resource path="res://Art/Gui/Popups.png" type="Texture" id=3]
+[ext_resource path="res://Sounds/SEPlayer.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -287,11 +288,9 @@ hue_variation_random = 0.01
 [node name="fear" type="CPUParticles2D" parent="."]
 position = Vector2( -40, 0 )
 emitting = false
-amount = 5
-lifetime = 2.0
-one_shot = true
+amount = 1
 explosiveness = 1.0
-randomness = 0.11
+randomness = 0.39
 texture = SubResource( 9 )
 emission_shape = 1
 emission_sphere_radius = 1.0
@@ -313,9 +312,7 @@ hue_variation_random = 0.05
 [node name="rage" type="CPUParticles2D" parent="."]
 position = Vector2( -40, 0 )
 emitting = false
-amount = 5
-lifetime = 2.0
-one_shot = true
+amount = 1
 explosiveness = 1.0
 randomness = 0.11
 texture = SubResource( 10 )
@@ -335,9 +332,7 @@ color_ramp = SubResource( 12 )
 [node name="hearts" type="CPUParticles2D" parent="."]
 position = Vector2( -40, 0 )
 emitting = false
-amount = 5
-lifetime = 2.0
-one_shot = true
+amount = 1
 explosiveness = 1.0
 randomness = 0.11
 texture = SubResource( 13 )
@@ -345,7 +340,7 @@ emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector2( 0, -1 )
 gravity = Vector2( 0, 5 )
-initial_velocity = 50.0
+initial_velocity = 20.0
 initial_velocity_random = 0.5
 angular_velocity = 50.0
 angular_velocity_random = 1.0
@@ -355,5 +350,8 @@ scale_amount = 1.5
 scale_amount_random = 1.0
 color_ramp = SubResource( 14 )
 hue_variation = 1.0
+
+[node name="SEPlayer" parent="." instance=ExtResource( 4 )]
+volume_db = -15.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

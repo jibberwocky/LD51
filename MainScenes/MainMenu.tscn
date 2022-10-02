@@ -1,3 +1,88 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MainScenes/BGMPlayer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Art/Sprites/Logo.png" type="Texture" id=2]
+[ext_resource path="res://Gui/DialogDisplay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MainScenes/MainMenu.gd" type="Script" id=4]
 
 [node name="MainMenu" type="Node2D"]
+position = Vector2( 0, -400 )
+script = ExtResource( 4 )
+
+[node name="Logo" type="Sprite" parent="."]
+position = Vector2( -276, -11 )
+texture = ExtResource( 2 )
+offset = Vector2( 531, 212 )
+
+[node name="PlayButton" parent="." instance=ExtResource( 3 )]
+margin_left = 202.0
+margin_top = 157.0
+margin_right = 307.0
+margin_bottom = 194.0
+rect_pivot_offset = Vector2( 140, 11 )
+text = "Play"
+startActive = true
+
+[node name="HowToPlay" parent="." instance=ExtResource( 3 )]
+margin_left = 202.0
+margin_top = 197.0
+margin_right = 307.0
+margin_bottom = 234.0
+rect_pivot_offset = Vector2( 140, 11 )
+text = "How To Play"
+startActive = true
+
+[node name="DefeatBox" parent="." instance=ExtResource( 3 )]
+margin_left = 41.0
+margin_top = 243.0
+margin_right = 146.0
+margin_bottom = 280.0
+rect_pivot_offset = Vector2( 140, 11 )
+text = "Defeated"
+base_frame = 5
+locked = true
+
+[node name="VictoryBox" parent="." instance=ExtResource( 3 )]
+margin_left = 153.0
+margin_top = 243.0
+margin_right = 258.0
+margin_bottom = 280.0
+rect_pivot_offset = Vector2( 140, 11 )
+text = "Victorious"
+base_frame = 5
+locked = true
+
+[node name="DemorializeBox" parent="." instance=ExtResource( 3 )]
+margin_left = 265.0
+margin_top = 243.0
+margin_right = 370.0
+margin_bottom = 280.0
+rect_pivot_offset = Vector2( 140, 11 )
+text = "Demoralized"
+base_frame = 5
+locked = true
+
+[node name="ReconcileBox" parent="." instance=ExtResource( 3 )]
+margin_left = 377.0
+margin_top = 243.0
+margin_right = 482.0
+margin_bottom = 280.0
+rect_pivot_offset = Vector2( 140, 11 )
+text = "Reconciled"
+base_frame = 5
+locked = true
+
+[node name="Display" type="Control" parent="."]
+margin_top = 2.0
+margin_right = 512.0
+margin_bottom = 303.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 1 )]
+target_volume = -25
+
+[connection signal="choice_selected" from="PlayButton" to="." method="_on_PlayButton_choice_selected"]
+[connection signal="choice_selected" from="HowToPlay" to="." method="_on_HowToPlay_choice_selected"]

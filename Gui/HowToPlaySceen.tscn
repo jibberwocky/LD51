@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://fonts/OrangeKid14.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Gui/HowToPlaySceen.gd" type="Script" id=2]
+[ext_resource path="res://fonts/orange kid.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Art/Gui/NineSLice.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="Theme" id=6]
+default_font = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 28
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 14
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="HowToPlaySceen" type="NinePatchRect"]
+anchor_left = 0.0625
+anchor_right = 0.953125
+anchor_bottom = 0.996667
+mouse_filter = 0
+texture = ExtResource( 4 )
+region_rect = Rect2( 72, 0, 36, 36 )
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_top = 3.0
+margin_right = -1.0
+margin_bottom = -261.0
+theme = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "How To Play"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 41.0
+margin_right = -3.0
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 685, 62 )
+theme = SubResource( 6 )
+custom_colors/font_color = Color( 1, 0.996078, 0.811765, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Cross blades in a battle of cheesy melodrama and fast swords.
+
+Every ten seconds select an option of how you will respond with both your sword and your words, waiting is always an option.
+
+A PARRY will beat a THRUST, a THRUST will hit your foe so long as their guard is down.
+
+Navigate over-the-top emotions to affect the mood of the duel and predict your opponent. An angry foe will thrust more often, a fearful one will be on the defence, and one with feelings for you may be reluctant to attack.
+Choose dialog well matched to your swordplay (the box will highlight red on success) for a greater impact on your opponent.
+"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_Button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-
+signal CompletedOutcome(outcome)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -9,6 +9,7 @@ onready var _everyTenSeconds = $EveryTenSeconds
 onready var _inBetweenTimer = $NotTenSeconds
 onready var _dialogManager = $DialogManager
 onready var _swordManager = $SwordManager
+var outcomeOccured = false
 
 var duelist_healths = [GlobalSettings.MAX_DUELIST_HEALTH,GlobalSettings.MAX_DUELIST_HEALTH]
 
@@ -17,6 +18,7 @@ var duelist1_sword_choice = 0
 var duelist2_sword_choice = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	duelist2_mood = Vector3(rand_range(-5,10),rand_range(-5,10), rand_range(-5,100))
 	#$DialogDisplay.activate()
 	duelist2_sword_choice =  _select_enemy_action()
 	_everyTenSeconds.start()
@@ -29,13 +31,13 @@ func _process(delta):
 #	pass
 
 func _select_enemy_action() -> int:
-	var total_value = duelist2_mood.x + duelist2_mood.y + duelist2_mood.z
+	var total_value = duelist2_mood.x + duelist2_mood.y + duelist2_mood.z + 30
 	if(total_value <= 0):
 		return randi() % int(3)
 	var randRoll = randi() % int(total_value)
 	for i in range(0,3):
-		if randRoll < duelist2_mood[i]: return i
-		randRoll -= max(0,duelist2_mood[i])
+		if randRoll < duelist2_mood[i] + 10: return i
+		randRoll -= max(0,duelist2_mood[i]) + 10
 	return randi() % 3
 		
 func _on_EveryTenSeconds_timeout():
@@ -44,6 +46,7 @@ func _on_EveryTenSeconds_timeout():
 	resolve_round()
 	_inBetweenTimer.start()
 	yield(_inBetweenTimer, "timeout")
+	if(outcomeOccured): return
 	_everyTenSeconds.start()
 	_dialogManager.next_choice(duelist2_mood) #should be reset
 	_swordManager._reset()
@@ -70,11 +73,15 @@ func resolve_dialog_choices():
 	update_oponent_mood(mood_value)
 	for i in range (0, 3):
 		if(mood_value[i] > 0):
-			_swordManager._deulist2. emmit_mood(i, mood_value[i])
+			_swordManager._deulist2. emmit_mood(i, duelist2_mood[i])
 		
 	
 func update_oponent_mood(mood_value:Vector3):
 	duelist2_mood+= mood_value
+	if(duelist2_mood[GlobalSettings.MOODS.AFFECTION] >= 100):
+		_run_outcome(GlobalSettings.OUTCOMES.RECONCILE)
+	elif(duelist2_mood[GlobalSettings.MOODS.FEAR] >= 100):
+		_run_outcome(GlobalSettings.OUTCOMES.DEMORALIZE)
 	
 func _on_SwordManager_fightWon(winner):
 	match winner:
@@ -89,3 +96,14 @@ func _on_SwordManager_fightWon(winner):
 func _update_duelist_health(duelist: int, change_to_health: int):
 	duelist_healths[duelist] = duelist_healths[duelist] + change_to_health
 	_swordManager.update_healthbar(duelist,duelist_healths[duelist])
+	if(duelist_healths[duelist] <= 0):
+		_run_outcome(duelist)
+
+func _run_outcome(outcome:int):
+	if(outcomeOccured):return
+	outcomeOccured = true
+	_inBetweenTimer.stop()
+	_everyTenSeconds.stop()
+	_swordManager.animateOutcome(outcome)
+	emit_signal("CompletedOutcome",outcome)
+	GlobalSettings.victoriesAcheived[outcome] = true

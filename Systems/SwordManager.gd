@@ -17,13 +17,18 @@ onready var _2waitButton := $Duelist2/waitButton2
 
 onready var _healthbars := [$Duelist1/healthbar1, $Duelist2/healthbar2]
 
+export var SE_hit : AudioStreamSample = preload("res://Sounds/hit.wav")
+export var SE_clashGood : AudioStreamSample = preload("res://Sounds/klangGood.wav")
+export var SE_clashBad : AudioStreamSample = preload("res://Sounds/klangBad.wav")
+
 var target_pos := position
 const MOVE_LIMIT = 100
-const MOVE_DISTANCE = 15
+const MOVE_DISTANCE = 30
 const MOVE_RATE = 0.2
 var actionChoice :int= GlobalSettings.SWORD_ACTIONS.WAIT
 var fade_buttons = 1
 var temporary_target = target_pos.x
+var halted = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_thrustButton.text = "Thrust"
@@ -44,7 +49,7 @@ func _process(delta):
 		temporary_target = target_pos.x + ((randi() % 3) -3)
 	else:
 		print(position.x, ",", temporary_target)
-	position.x = lerp(position.x, temporary_target, MOVE_RATE)
+	if(!halted):position.x = lerp(position.x, temporary_target, MOVE_RATE)
 	fade_buttons -= 0.01
 	if(fade_buttons < 0.5):
 		_waitButton.vanish()
@@ -87,17 +92,14 @@ func resolve_sword_choices(duelist1Choice:int, duelist2Choice:int):
 				GlobalSettings.SWORD_ACTIONS.THRUST:
 					_deulist2.play_animation("thrust")
 					_deulist1.set_next_anim("getHit")
+					_deulist2.playSoundEffect(SE_clashBad)
 					fight_winner = -1
 					emit_signal("fightWon",2)
 					_2thrustButton.activate()
 					pass
 				GlobalSettings.SWORD_ACTIONS.PARRY:	
 					_deulist2.play_animation("parry")
-					_deulist1.set_next_anim("thrust")
-					_deulist2.set_next_anim("getHit")
 					_2parryButton.activate()
-					fight_winner = 1
-					emit_signal("fightWon",1)
 					pass
 		GlobalSettings.SWORD_ACTIONS.THRUST:
 			_deulist1.play_animation("thrust")
@@ -106,12 +108,15 @@ func resolve_sword_choices(duelist1Choice:int, duelist2Choice:int):
 					_2waitButton.activate()
 					_deulist2.play_animation("wait")
 					_deulist2.set_next_anim("getHit")
+					_deulist1.playSoundEffect(SE_clashGood)
 					fight_winner = 1
 					emit_signal("fightWon",1)
 				GlobalSettings.SWORD_ACTIONS.THRUST:
 					_deulist2.play_animation("thrust")
 					_deulist1.set_next_anim("getHit")
 					_deulist2.set_next_anim("getHit")
+					_deulist1.playSoundEffect(SE_clashGood)
+					_deulist2.playSoundEffect(SE_clashBad)
 					_2thrustButton.activate()
 					emit_signal("fightWon",0)
 					pass
@@ -120,6 +125,7 @@ func resolve_sword_choices(duelist1Choice:int, duelist2Choice:int):
 					_deulist2.set_next_anim("thrust")
 					_deulist1.set_next_anim("getHit")
 					_2parryButton.activate()
+					_deulist2.playSoundEffect(SE_clashBad)
 					fight_winner = -1
 					emit_signal("fightWon",2)
 					pass
@@ -129,15 +135,12 @@ func resolve_sword_choices(duelist1Choice:int, duelist2Choice:int):
 				GlobalSettings.SWORD_ACTIONS.WAIT:
 					_2waitButton.activate()
 					_deulist2.play_animation("wait")
-					_deulist2.set_next_anim("thrust")
-					_deulist1.set_next_anim("getHit")
-					fight_winner = -1
-					emit_signal("fightWon",2)
 				GlobalSettings.SWORD_ACTIONS.THRUST:
 					_deulist2.play_animation("thrust")
 					_deulist1.set_next_anim("thrust")
 					_deulist2.set_next_anim("getHit")
 					_2thrustButton.activate()
+					_deulist1.playSoundEffect(SE_clashGood)
 					fight_winner = 1
 					emit_signal("fightWon",1)
 					pass
@@ -153,3 +156,28 @@ func move_duelists(direction :int):
 	
 func update_healthbar(healthbar_number:int, new_value:int):
 	_healthbars[healthbar_number].target_value = (float(new_value)/GlobalSettings.MAX_DUELIST_HEALTH * 100)
+	
+func animateOutcome(outcome:int):
+	halted = true
+	match outcome:
+		GlobalSettings.OUTCOMES.DEFEAT:
+			_deulist2.play_animation("thrust")
+			_deulist1.play_animation("getHit")
+			_deulist1.set_next_anim("die")
+			_deulist1.continue_animating = false
+		GlobalSettings.OUTCOMES.VICTORY:
+			_deulist1.play_animation("thrust")
+			_deulist2.play_animation("getHit")
+			_deulist2.set_next_anim("die")
+			_deulist2.continue_animating = false
+		GlobalSettings.OUTCOMES.DEMORALIZE:
+			_deulist1.play_animation("wait")
+			_deulist2.set_next_anim("give_up")
+			_deulist2.continue_animating = false
+		GlobalSettings.OUTCOMES.RECONCILE:
+			_deulist1.set_next_anim("reconcile")
+			_deulist2.set_next_anim("reconcile")
+			_deulist2.continue_animating = false
+			_deulist1.continue_animating = false
+
+

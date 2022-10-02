@@ -3,7 +3,8 @@ class_name DialogDisplay
 
 signal choice_selected(choice_number)
 
-export var text := "text" setget set_text
+export var text : String setget set_text
+export var startActive : bool = false
 
 func set_text(txt:String):
 	if(_label):_label.text = txt
@@ -27,6 +28,7 @@ onready var _label := $Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.text = text
 #	_button.margin_bottom = self.margin_bottom
 #	_button.margin_top = self.margin_top
 #	_button.margin_left = self.margin_left
@@ -38,6 +40,8 @@ func _ready():
 	base_pos = self.margin_top
 	target_pos = base_pos
 	base_height = self.margin_bottom - self.margin_top
+	if(startActive):
+		activate()
 
 func _process(delta):
 	if(margin_top != target_pos):
@@ -53,7 +57,6 @@ func set_base_frame(frame:int):
 	change_color(base_frame)
 
 func change_color(frame:int)->void:
-	print("changing color")
 	region_rect.position.x = frame*36
 
 
@@ -79,8 +82,6 @@ func _on_Button_button_down():
 	pass # Replace with function body.
 
 func lock(locking: bool):
-	if(locking):
-		print("locking button")
 	locked = locking
 #	_button.disabled = locking
 	
@@ -97,6 +98,7 @@ func activate():
 
 func _on_Button_pressed():
 	if(locked): return
+	$AudioStreamPlayer.play()
 	emit_signal("choice_selected", choice_number)
 	self.locked = true
 	
