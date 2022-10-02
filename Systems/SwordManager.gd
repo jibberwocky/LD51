@@ -49,8 +49,6 @@ func _ready():
 func _process(delta):
 	if(abs(position.x - temporary_target) <= 0.1):
 		temporary_target = target_pos.x
-	else:
-		print(position.x, ",", temporary_target)
 	if(!halted):position.x = lerp(position.x, temporary_target, MOVE_RATE)
 	fade_buttons -= 0.01
 	if(fade_buttons < 0.5):
