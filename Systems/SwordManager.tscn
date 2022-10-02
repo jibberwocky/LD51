@@ -115,6 +115,9 @@ margin_top = 12.0
 margin_right = 30.76
 margin_bottom = 18.0
 
+[node name="SEPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
+
 [connection signal="choice_selected" from="Duelist1/ThustButton" to="." method="_on_ThustButton_choice_selected"]
 [connection signal="choice_selected" from="Duelist1/waitButton" to="." method="_on_ThustButton_choice_selected"]
 [connection signal="choice_selected" from="Duelist1/ParryButton" to="." method="_on_ParryButton_choice_selected"]

@@ -58,14 +58,14 @@ func populateDB():
 	#Consider reading in JSON if I have time
 	Dialogs["neutral"].append_array([
 	ChoiceObject.new("I can't let you pass, just lower your blade",[
-	DialogChoice.new("The friend I knew would never demand that", Vector3(10,-5,1), GlobalSettings.SWORD_ACTIONS.WAIT),
-	DialogChoice.new("What? Afraid I might win a fair fight?", Vector3(1,10,10),  GlobalSettings.SWORD_ACTIONS.PARRY),
-	DialogChoice.new("the others couldn't stand in my way neither will you!", Vector3(-20,15,10), GlobalSettings.SWORD_ACTIONS.THRUST),
+	DialogChoice.new("The friend I knew would never demand that", Vector3(10,-5,5), GlobalSettings.SWORD_ACTIONS.WAIT),
+	DialogChoice.new("What? Afraid I might win a fair fight?", Vector3(1,0,10),  GlobalSettings.SWORD_ACTIONS.PARRY),
+	DialogChoice.new("the others couldn't stand in my way neither will you!", Vector3(-20,15,5), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("...", Vector3(0,1,0), GlobalSettings.SWORD_ACTIONS.WAIT) ]),
 	
 	ChoiceObject.new("Impressive… you’ve come a long way since we last crossed swords",[
 	DialogChoice.new("You’ve improved too, I’ve never felt more alive", Vector3(10,0,-10),  GlobalSettings.SWORD_ACTIONS.THRUST),
-	DialogChoice.new("I’ve got a few more tricks where that came from", Vector3(0,0,10), GlobalSettings.SWORD_ACTIONS.PARRY),
+	DialogChoice.new("I’ve got a few more tricks where that came from", Vector3(5,0,10), GlobalSettings.SWORD_ACTIONS.PARRY),
 	DialogChoice.new("Maybe you’re just losing your touch", Vector3(0,0,20), GlobalSettings.SWORD_ACTIONS.PARRY),
 	DialogChoice.new("...", Vector3(-5,-5,5), GlobalSettings.SWORD_ACTIONS.WAIT) ]),
 	
@@ -92,11 +92,11 @@ func populateDB():
 	ChoiceObject.new("Don’t mistake my restraint for mercy",[
 	DialogChoice.new("Oh you're too predictable for that", Vector3(5,0,10), GlobalSettings.SWORD_ACTIONS.PARRY),
 	DialogChoice.new("and here’s me thinking you’re just bad at this", Vector3(-10,0,15), GlobalSettings.SWORD_ACTIONS.THRUST),
-	DialogChoice.new("And don’t mistake my respect for forgiveness", Vector3(5,5,5), GlobalSettings.SWORD_ACTIONS.THRUST),
+	DialogChoice.new("And don’t mistake my respect for forgiveness", Vector3(5,5,0), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("...", Vector3(10,0,0), GlobalSettings.SWORD_ACTIONS.WAIT) ]),
 	
 	ChoiceObject.new("It’s a shame you won’t live to regret your insolence!",[
-	DialogChoice.new("You know I've always wanted to die with no regrets", Vector3(15,-5,0),  GlobalSettings.SWORD_ACTIONS.THRUST),
+	DialogChoice.new("You know I've always wanted to die with no regrets", Vector3(15,-5,-10),  GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("Bold claim, but can you back it up?", Vector3(0,5,5),  GlobalSettings.SWORD_ACTIONS.PARRY),
 	DialogChoice.new("I’ll make YOU regret everything you’ve done", Vector3(-10,10,0),  GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("...", Vector3(0,0,10), GlobalSettings.SWORD_ACTIONS.WAIT) ]),
@@ -110,7 +110,7 @@ func populateDB():
 	ChoiceObject.new("I don’t have time for this! This ends here!",[
 	DialogChoice.new("Somewhere to be? am I holding you up?", Vector3(0,0,5), GlobalSettings.SWORD_ACTIONS.WAIT),
 	DialogChoice.new("We can end this any time you want, just give up", Vector3(10,0,5), GlobalSettings.SWORD_ACTIONS.WAIT),
-	DialogChoice.new("Careful old friend, impatience makes you blunder", Vector3(0,0,15), GlobalSettings.SWORD_ACTIONS.PARRY),
+	DialogChoice.new("Careful old friend, impatience makes you blunder", Vector3(5,0,15), GlobalSettings.SWORD_ACTIONS.PARRY),
 	DialogChoice.new("...", Vector3(0,0,30), GlobalSettings.SWORD_ACTIONS.WAIT) ]),
 	
 	ChoiceObject.new("",[

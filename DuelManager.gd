@@ -54,8 +54,9 @@ func _on_EveryTenSeconds_timeout():
 	pass # Replace with function body.
 
 func resolve_round():
-	resolve_dialog_choices()
 	_swordManager.resolve_sword_choices(duelist1_sword_choice, duelist2_sword_choice)
+	resolve_dialog_choices()
+	
 	#get choices
 	#play animations and dialogs
 	#update values
@@ -97,6 +98,8 @@ func _update_duelist_health(duelist: int, change_to_health: int):
 	duelist_healths[duelist] = duelist_healths[duelist] + change_to_health
 	_swordManager.update_healthbar(duelist,duelist_healths[duelist])
 	if(duelist_healths[duelist] <= 0):
+		if(duelist_healths[wrapi(duelist +1, 0, 2)] <= 0):
+			_run_outcome(4)
 		_run_outcome(duelist)
 
 func _run_outcome(outcome:int):

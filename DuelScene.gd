@@ -39,4 +39,6 @@ func _on_DuelManager_CompletedOutcome(outcome):
 			outcomeDialog.text = "DEMORALIZE"
 		GlobalSettings.OUTCOMES.RECONCILE:
 			outcomeDialog.text = "RECONCILE"
+		GlobalSettings.OUTCOMES.TRADGEDY:
+			outcomeDialog.text = "TRADGEDY"
 

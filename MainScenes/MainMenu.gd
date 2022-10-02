@@ -8,7 +8,7 @@ onready var _HowToPlayScreen= preload("res://Gui/HowToPlaySceen.tscn")
 var have_activated = false
 var out_of_screen_pos = Vector2(0,-400)
 var target_position = Vector2.ZERO
-onready var victoryBoxes := [$DefeatBox, $VictoryBox, $DemorializeBox, $ReconcileBox]
+onready var victoryBoxes := [$DefeatBox, $VictoryBox, $DemorializeBox, $ReconcileBox, $TragedyBox]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

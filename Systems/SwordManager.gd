@@ -14,12 +14,14 @@ onready var _waitButton := $Duelist1/waitButton
 onready var _2thrustButton := $Duelist2/ThustButton
 onready var _2parryButton := $Duelist2/ParryButton
 onready var _2waitButton := $Duelist2/waitButton2
-
+onready var _sePlayer := $SEPlayer
 onready var _healthbars := [$Duelist1/healthbar1, $Duelist2/healthbar2]
 
 export var SE_hit : AudioStreamSample = preload("res://Sounds/hit.wav")
 export var SE_clashGood : AudioStreamSample = preload("res://Sounds/klangGood.wav")
 export var SE_clashBad : AudioStreamSample = preload("res://Sounds/klangBad.wav")
+export var SE_clashEnd : AudioStreamSample = preload("res://Sounds/klang1.wav")
+export var SE_noHit : AudioStreamSample = preload("res://Sounds/no hit.wav")
 
 var target_pos := position
 const MOVE_LIMIT = 100
@@ -46,7 +48,7 @@ func _ready():
 #	pass
 func _process(delta):
 	if(abs(position.x - temporary_target) <= 0.1):
-		temporary_target = target_pos.x + ((randi() % 3) -3)
+		temporary_target = target_pos.x
 	else:
 		print(position.x, ",", temporary_target)
 	if(!halted):position.x = lerp(position.x, temporary_target, MOVE_RATE)
@@ -89,6 +91,7 @@ func resolve_sword_choices(duelist1Choice:int, duelist2Choice:int):
 				GlobalSettings.SWORD_ACTIONS.WAIT:
 					_deulist2.play_animation("wait")
 					_2waitButton.activate()
+					playSoundEffect(SE_noHit)
 				GlobalSettings.SWORD_ACTIONS.THRUST:
 					_deulist2.play_animation("thrust")
 					_deulist1.set_next_anim("getHit")
@@ -100,6 +103,7 @@ func resolve_sword_choices(duelist1Choice:int, duelist2Choice:int):
 				GlobalSettings.SWORD_ACTIONS.PARRY:	
 					_deulist2.play_animation("parry")
 					_2parryButton.activate()
+					playSoundEffect(SE_noHit)
 					pass
 		GlobalSettings.SWORD_ACTIONS.THRUST:
 			_deulist1.play_animation("thrust")
@@ -135,6 +139,10 @@ func resolve_sword_choices(duelist1Choice:int, duelist2Choice:int):
 				GlobalSettings.SWORD_ACTIONS.WAIT:
 					_2waitButton.activate()
 					_deulist2.play_animation("wait")
+					_deulist2.set_next_anim("thrust")
+					_deulist1.set_next_anim("getHit")
+					emit_signal("fightWon",2)
+					_deulist2.playSoundEffect(SE_clashBad)
 				GlobalSettings.SWORD_ACTIONS.THRUST:
 					_deulist2.play_animation("thrust")
 					_deulist1.set_next_anim("thrust")
@@ -147,6 +155,7 @@ func resolve_sword_choices(duelist1Choice:int, duelist2Choice:int):
 				GlobalSettings.SWORD_ACTIONS.PARRY:	
 					_deulist2.play_animation("parry")
 					_2parryButton.activate()
+					playSoundEffect(SE_noHit)
 					pass
 	
 	move_duelists(fight_winner)
@@ -159,6 +168,7 @@ func update_healthbar(healthbar_number:int, new_value:int):
 	
 func animateOutcome(outcome:int):
 	halted = true
+	playSoundEffect(SE_clashEnd)
 	match outcome:
 		GlobalSettings.OUTCOMES.DEFEAT:
 			_deulist2.play_animation("thrust")
@@ -179,5 +189,16 @@ func animateOutcome(outcome:int):
 			_deulist2.set_next_anim("reconcile")
 			_deulist2.continue_animating = false
 			_deulist1.continue_animating = false
+		GlobalSettings.OUTCOMES.TRADGEDY:
+			_deulist1.set_next_anim("die")
+			_deulist2.set_next_anim("die")
+			_deulist2.continue_animating = false
+			_deulist1.continue_animating = false
+
+func playSoundEffect(soundFile) -> void:
+		if !_sePlayer.is_playing():
+			_sePlayer.stream = soundFile
+			_sePlayer.pitch_scale = rand_range(0.9, 1.1)
+			_sePlayer.play()
 
 

@@ -87,11 +87,9 @@ theme = SubResource( 6 )
 custom_colors/font_color = Color( 1, 0.996078, 0.811765, 1 )
 custom_fonts/font = SubResource( 8 )
 text = "Cross blades in a battle of cheesy melodrama and fast swords.
-
 Every ten seconds select an option of how you will respond with both your sword and your words, waiting is always an option.
 
-A PARRY will beat a THRUST, a THRUST will hit your foe so long as their guard is down.
-
+A THRUST will hit your foe so long as their guard is down. A PARRY will beat a THRUST, but your foe can take advantage of your opening if they WAIT. (if you wait you will never attack).
 Navigate over-the-top emotions to affect the mood of the duel and predict your opponent. An angry foe will thrust more often, a fearful one will be on the defence, and one with feelings for you may be reluctant to attack.
 Choose dialog well matched to your swordplay (the box will highlight red on success) for a greater impact on your opponent.
 "

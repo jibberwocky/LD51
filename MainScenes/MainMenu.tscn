@@ -72,6 +72,17 @@ text = "Reconciled"
 base_frame = 5
 locked = true
 
+[node name="TragedyBox" parent="." instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 376.0
+margin_top = 200.0
+margin_right = 481.0
+margin_bottom = 237.0
+rect_pivot_offset = Vector2( 140, 11 )
+text = "Tragic"
+base_frame = 5
+locked = true
+
 [node name="Display" type="Control" parent="."]
 margin_top = 2.0
 margin_right = 512.0

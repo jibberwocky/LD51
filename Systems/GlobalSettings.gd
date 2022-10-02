@@ -21,9 +21,10 @@ enum OUTCOMES{
 	VICTORY
 	DEMORALIZE
 	RECONCILE
+	TRADGEDY
 }
 
-var victoriesAcheived := [false,false,false,false]
+var victoriesAcheived := [false,false,false,false,false]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
