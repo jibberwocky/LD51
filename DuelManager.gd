@@ -12,11 +12,12 @@ onready var _swordManager = $SwordManager
 
 var duelist_healths = [GlobalSettings.MAX_DUELIST_HEALTH,GlobalSettings.MAX_DUELIST_HEALTH]
 
-var duelist2_mood = Vector3(50.0, 50.0, 50.0)
+var duelist2_mood = Vector3(0, 0, 0)
 var duelist1_sword_choice = 0
 var duelist2_sword_choice = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	duelist2_sword_choice =  _select_enemy_action()
 	_everyTenSeconds.start()
 	pass # Replace with function body.
 
@@ -26,16 +27,26 @@ func _process(delta):
 #func _process(delta):
 #	pass
 
-
+func _select_enemy_action() -> int:
+	var total_value = duelist2_mood.x + duelist2_mood.y + duelist2_mood.z
+	if(total_value <= 0):
+		return randi() % int(3)
+	var randRoll = randi() % int(total_value)
+	for i in range(0,3):
+		if randRoll < duelist2_mood[i]: return i
+		randRoll -= max(0,duelist2_mood[i])
+	return randi() % 3
+		
 func _on_EveryTenSeconds_timeout():
 	duelist1_sword_choice = _swordManager.actionChoice
-	duelist2_sword_choice = randi()%3
+	duelist2_sword_choice =  _select_enemy_action()
 	resolve_round()
 	_inBetweenTimer.start()
 	yield(_inBetweenTimer, "timeout")
 	_everyTenSeconds.start()
-	_dialogManager.testChoice() #should be reset
+	_dialogManager.next_choice(duelist2_mood) #should be reset
 	_swordManager._reset()
+	$Label.text = "mood vals"+ String(duelist2_mood.x) + ":" + String(duelist2_mood.y) + ":"+ String(duelist2_mood.z)
 	pass # Replace with function body.
 
 func resolve_round():
@@ -52,6 +63,9 @@ func resolve_dialog_choices():
 	var mood_value = _dialogManager.choices[my_choice].mood_value
 	if(duelist1_sword_choice == _dialogManager.choices[my_choice].predicted_move):
 		mood_value *= 2
+		if(my_choice < 3):_dialogManager._choiceDisplay[my_choice].change_color(7)
+	else:
+		if(my_choice < 3):_dialogManager._choiceDisplay[my_choice].change_color(1)
 	update_oponent_mood(mood_value)
 	for i in range (0, 3):
 		if(mood_value[i] > 0):
@@ -60,6 +74,7 @@ func resolve_dialog_choices():
 	
 func update_oponent_mood(mood_value:Vector3):
 	duelist2_mood+= mood_value
+	
 func _on_SwordManager_fightWon(winner):
 	match winner:
 		1:#duelist1

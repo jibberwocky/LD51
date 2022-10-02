@@ -2,43 +2,21 @@ extends Control
 class_name Dialog
 onready var dialogGuiElement = preload("res://Gui/DialogDisplay.tscn")
 
-class DialogChoice:
-	var text: String = ""
-	var mood_value : Vector3 = Vector3.ZERO
-	var predicted_move : int = GlobalSettings.SWORD_ACTIONS.WAIT
-
-	func _init(inText:String, mood_V:Vector3, prediction:int):
-		text = inText
-		mood_value = mood_V
-		predicted_move = prediction
-	
-	
-
-
-enum moods{
-	AFFECTION
-	FEAR
-	RAGE
-}
-
 func _ready():
-	testChoice()
+	setupChoice(_dialogDB.firstDialog)
 
 var choices : Array
 var prompt : String = ""
 onready var _promptDisplay := $PromptDisplay
 onready var _choiceDisplay := [$choiceDialog1, $choiceDialog2, $choiceDialog3]
 onready var _choicesDelay := $choicesDelay
-var chosen_choice := 4
+export var _dialogDB : Resource= preload("res://Systems/DialogDatabase.tres")
+var chosen_choice := 3
 
-func testChoice():
-	setupChoice("It doesn't have to go like this",
-	[DialogChoice.new("Like hell it doesn't, I've got you dead to rights!", Vector3(0,10,00), 0),
-	DialogChoice.new("How dare you say that. After what you did!", Vector3(0,0,10), 0),
-	DialogChoice.new("I wish that were true...", Vector3(10,-10,0), 0),
-	DialogChoice.new("Maybe...", Vector3(20,0,0), 0) ])
+func next_choice(moods:Vector3):
+	setupChoice(_dialogDB.get_next_dialog(moods))
 	
-func update_dialog_gui_choice(choice:DialogChoice, gui:DialogDisplay, choice_num:int):
+func update_dialog_gui_choice(choice:DialogDatabase.DialogChoice, gui:DialogDisplay, choice_num:int):
 	gui.text = choice.text
 	gui.activate()
 	gui.choice_number = choice_num
@@ -49,10 +27,10 @@ func update_dialog_gui_prompt(text:String, gui:DialogDisplay):
 	gui.activate()
 	gui.locked = true
 
-func setupChoice(new_prompt:String, new_choices:Array):
+func setupChoice(ChoiceObject : DialogDatabase.ChoiceObject):
 	chosen_choice = 3
-	prompt = new_prompt
-	choices = new_choices
+	prompt = ChoiceObject.prompt
+	choices = ChoiceObject.choices
 	update_dialog_gui_prompt(prompt, _promptDisplay)
 	_choicesDelay.start()
 	

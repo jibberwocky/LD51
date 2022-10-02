@@ -10,6 +10,11 @@ enum SWORD_ACTIONS{
 	PARRY
 	THRUST
 }
+enum MOODS{
+	AFFECTION
+	FEAR
+	RAGE
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -39,5 +39,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	play_animation(next_anim)
 
 func emmit_mood(mood_type:int, mood_ammount:int):
-	mood_particles[mood_type].set_amount(mood_ammount/5)
+	mood_particles[mood_type].set_amount(mood_ammount/2)
 	mood_particles[mood_type].set_emitting(true)

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/klangBad.wav-55c12c86f72af40f5e9ad6620694b84a.sample"
+
+[deps]
+
+source_file="res://Sounds/klangBad.wav"
+dest_files=[ "res://.import/klangBad.wav-55c12c86f72af40f5e9ad6620694b84a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
