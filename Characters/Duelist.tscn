@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Art/Sprites/Duelist_1.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Duelist.gd" type="Script" id=2]
@@ -43,6 +43,23 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=15]
+resource_name = "die"
+length = 0.5
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0833333, 0.166667, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 19, 20, 21, 22 ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "getHit"
 length = 0.416667
@@ -70,6 +87,22 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1.1 ), Vector2( 1, 0.9 ), Vector2( 1, 1.1 ), Vector2( 1, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "give_up"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 23, 24, 25, 26, 25 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -117,6 +150,22 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1.05, 1 ), Vector2( 1.05, 1 ), Vector2( 1, 1.05 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "reconcile"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 28, 29, 30, 31, 30, 31 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -202,15 +251,18 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 [node name="Duelist" type="Sprite"]
 position = Vector2( 40, 0 )
 texture = ExtResource( 1 )
-hframes = 20
+hframes = 32
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/RESET = SubResource( 1 )
+anims/die = SubResource( 15 )
 anims/getHit = SubResource( 3 )
+anims/give_up = SubResource( 16 )
 anims/idle = SubResource( 2 )
 anims/parry = SubResource( 4 )
+anims/reconcile = SubResource( 17 )
 anims/thrust = SubResource( 5 )
 anims/wait = SubResource( 6 )
 

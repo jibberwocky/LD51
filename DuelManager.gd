@@ -17,6 +17,7 @@ var duelist1_sword_choice = 0
 var duelist2_sword_choice = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#$DialogDisplay.activate()
 	duelist2_sword_choice =  _select_enemy_action()
 	_everyTenSeconds.start()
 	pass # Replace with function body.

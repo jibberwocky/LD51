@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "DialogDisplay",
 "language": "GDScript",
 "path": "res://Gui/DialogDisplay.gd"
+}, {
+"base": "Node",
+"class": "scene_manager",
+"language": "GDScript",
+"path": "res://Systems/SceneManager.gd"
 } ]
 _global_script_class_icons={
 "Dialog": "",
 "DialogDatabase": "",
-"DialogDisplay": ""
+"DialogDisplay": "",
+"scene_manager": ""
 }
 
 [application]

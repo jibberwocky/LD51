@@ -58,9 +58,9 @@ func populateDB():
 	#Consider reading in JSON if I have time
 	Dialogs["neutral"].append_array([
 	ChoiceObject.new("I can't let you pass, just lower your blade",[
-	DialogChoice.new("The friend I knew would never stand against me like this.", Vector3(10,-5,1), GlobalSettings.SWORD_ACTIONS.WAIT),
+	DialogChoice.new("The friend I knew would never demand that", Vector3(10,-5,1), GlobalSettings.SWORD_ACTIONS.WAIT),
 	DialogChoice.new("What. afraid I might win a fair fight?", Vector3(1,10,10),  GlobalSettings.SWORD_ACTIONS.PARRY),
-	DialogChoice.new("the others couldn't stand in my way, neither will you!", Vector3(-20,15,10), GlobalSettings.SWORD_ACTIONS.THRUST),
+	DialogChoice.new("the others couldn't stand in my way neither will you!", Vector3(-20,15,10), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("...", Vector3(0,1,0), GlobalSettings.SWORD_ACTIONS.WAIT) ]),
 	
 	ChoiceObject.new("Impressive… you’ve come a long way from the student I once knew",[
@@ -76,14 +76,14 @@ func populateDB():
 	DialogChoice.new("...", Vector3(5,0,0), GlobalSettings.SWORD_ACTIONS.PARRY) ]),
 	
 	ChoiceObject.new("Your father had to die! You must understand he was a monster and a traitor!",[
-	DialogChoice.new("LIAR! YOU are the traitor. You’ll pay for what you did", Vector3(0,0,20), GlobalSettings.SWORD_ACTIONS.THRUST),
+	DialogChoice.new("LIAR! You’ll pay for what you did", Vector3(0,0,20), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("I understand ...", Vector3(10,0,-10), GlobalSettings.SWORD_ACTIONS.WAIT),
-	DialogChoice.new("this isn't about him?. This has always been about you.", Vector3(15,10,-10), GlobalSettings.SWORD_ACTIONS.THRUST),
+	DialogChoice.new("this isn't about him. This has always been about you.", Vector3(15,10,-10), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("...", Vector3(0,15,0), GlobalSettings.SWORD_ACTIONS.THRUST) ]),
 	
 	ChoiceObject.new("It’s clear you our past means nothing to you. This ends here!",[
 	DialogChoice.new("Indeed. Give me a good fight, like the ones we used to have", Vector3(30,0,0), GlobalSettings.SWORD_ACTIONS.THRUST),
-	DialogChoice.new("Please. Wait. You were my friend, I loved you. ", Vector3(30,-20,-20), GlobalSettings.SWORD_ACTIONS.WAIT),
+	DialogChoice.new("Please. Wait. You were my friend. ", Vector3(30,-20,-20), GlobalSettings.SWORD_ACTIONS.WAIT),
 	DialogChoice.new("Then prepare to die", Vector3(-20,40,0), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("...", Vector3(0,0,40), GlobalSettings.SWORD_ACTIONS.PARRY) ]),
 	])
@@ -182,10 +182,10 @@ func populateDB():
 	DialogChoice.new("And you’d do the same? you aren't above this", Vector3(-10,0,10), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("...", Vector3(10,-10,-10), GlobalSettings.SWORD_ACTIONS.WAIT) ]),
 	
-	ChoiceObject.new("Let up a minute, you're frightening me, this isn’t a fight with honor",[
-	DialogChoice.new("Afraid of a real fight?", Vector3(0,10,15), GlobalSettings.SWORD_ACTIONS.THRUST),
+	ChoiceObject.new("Let up a minute, you're frightening me",[
+	DialogChoice.new("Afraid of a real threat?", Vector3(0,10,15), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("My real friend would fight not cower", Vector3(5,20,10), GlobalSettings.SWORD_ACTIONS.PARRY),
-	DialogChoice.new("*INTIMIDATING YELL*", Vector3(-30,40,0), GlobalSettings.SWORD_ACTIONS.THRUST),
+	DialogChoice.new("*YELL IN THEIR FACE*", Vector3(-30,40,0), GlobalSettings.SWORD_ACTIONS.THRUST),
 	DialogChoice.new("...", Vector3(0,20,0), GlobalSettings.SWORD_ACTIONS.THRUST) ]),
 	
 	ChoiceObject.new("Please, have mercy, I don’t want to do this anymore",[

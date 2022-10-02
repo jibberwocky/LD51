@@ -61,6 +61,7 @@ margin_right = -100.536
 margin_bottom = 18.0
 
 [node name="Duelist2" parent="." instance=ExtResource( 1 )]
+self_modulate = Color( 1.6, 1.2, 0.9, 1 )
 position = Vector2( 271, 240 )
 flip_h = true
 
