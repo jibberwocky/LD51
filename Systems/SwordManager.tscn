@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/Duelist.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Gui/DialogDisplay.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Systems/SwordManager.gd" type="Script" id=3]
+[ext_resource path="res://Art/Sprites/Duelist_2Template.png" type="Texture" id=4]
 [ext_resource path="res://Gui/healthbar1.tscn" type="PackedScene" id=7]
 
 [node name="SwordManager" type="Node2D"]
@@ -10,6 +11,8 @@ script = ExtResource( 3 )
 
 [node name="Duelist1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 283, 240 )
+texture = ExtResource( 4 )
+skin = ExtResource( 4 )
 
 [node name="ThustButton" parent="Duelist1" instance=ExtResource( 2 )]
 anchor_left = 0.368
@@ -61,7 +64,6 @@ margin_right = -100.536
 margin_bottom = 18.0
 
 [node name="Duelist2" parent="." instance=ExtResource( 1 )]
-self_modulate = Color( 1.6, 1.2, 0.9, 1 )
 position = Vector2( 271, 240 )
 flip_h = true
 

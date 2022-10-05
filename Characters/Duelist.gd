@@ -16,7 +16,10 @@ export var SE_hit : AudioStreamSample = preload("res://Sounds/hit.wav")
 export var SE_clashGood : AudioStreamSample = preload("res://Sounds/klangGood.wav")
 export var SE_clashBad : AudioStreamSample = preload("res://Sounds/klangBad.wav")
 
+export var skin : Texture
+
 func _ready():
+	set_texture(skin) 
 	if(flip_h):
 		_blood_particles.set_direction(Vector2(1, -0.5))
 		_blood_particles.position = Vector2(40,0)
